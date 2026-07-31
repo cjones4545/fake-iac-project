@@ -1,0 +1,3 @@
+app_name: fake-iac-project
+app_dir: /opt/{{ app_name }}
+app_port: 8080

@@ -1,0 +1,3 @@
+- name: restart fake app
+  ansible.builtin.debug:
+    msg: "Restart would happen here for {{ app_name }}"

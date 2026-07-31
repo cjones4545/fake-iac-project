@@ -1,0 +1,13 @@
+- name: Ensure application directory exists
+  ansible.builtin.file:
+    path: "{{ app_dir }}"
+    state: directory
+    mode: '0755'
+
+- name: Write placeholder deployment marker
+  ansible.builtin.copy:
+    dest: "{{ app_dir }}/deployment.txt"
+    content: |
+      role-managed deployment for {{ app_name }}
+      port={{ app_port }}
+    mode: '0644'

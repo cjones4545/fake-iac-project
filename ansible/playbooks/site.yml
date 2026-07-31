@@ -1,0 +1,24 @@
+---
+- name: Configure fake application hosts
+  hosts: web
+  become: true
+  gather_facts: true
+
+  vars:
+    app_name: fake-iac-project
+    app_dir: /opt/{{ app_name }}
+
+  tasks:
+    - name: Ensure application directory exists
+      ansible.builtin.file:
+        path: "{{ app_dir }}"
+        state: directory
+        mode: '0755'
+
+    - name: Install a placeholder deployment marker
+      ansible.builtin.copy:
+        dest: "{{ app_dir }}/deployment.txt"
+        content: |
+          App: {{ app_name }}
+          Environment: {{ ansible_environment | default('dev') }}
+        mode: '0644'
